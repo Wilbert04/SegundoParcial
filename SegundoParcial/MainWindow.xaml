@@ -6,5 +6,11 @@
         xmlns:local="clr-namespace:SegundoParcial"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid/>
+    <Grid>
+        <Menu>
+            <MenuItem Header="Registros" Click="MenuItem_Click">
+
+            </MenuItem>
+        </Menu>
+    </Grid>
 </Window>
