@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SegundoParcial.UI.Registro;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,6 +24,24 @@ namespace SegundoParcial
         public MainWindow()
         {
             InitializeComponent();
+        }
+
+        private void RegistroLlamada_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+       
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            RLlamada rLlamada = new RLlamada();
+            rLlamada.Show();
         }
     }
 }

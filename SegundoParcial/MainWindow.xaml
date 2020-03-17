@@ -7,10 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Menu>
-            <MenuItem Header="Registros" Click="MenuItem_Click">
+        <Button Content="Registro de llamada" HorizontalAlignment="Left" Margin="315,121,0,0" VerticalAlignment="Top" Click="Button_Click_1"/>
 
-            </MenuItem>
-        </Menu>
     </Grid>
 </Window>
