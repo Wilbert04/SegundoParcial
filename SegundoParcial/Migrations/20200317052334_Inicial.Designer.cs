@@ -9,8 +9,8 @@ using SegundoParcial.DAL;
 namespace SegundoParcial.Migrations
 {
     [DbContext(typeof(Contexto))]
-    [Migration("20200317020242_Nueva")]
-    partial class Nueva
+    [Migration("20200317052334_Inicial")]
+    partial class Inicial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -29,7 +29,7 @@ namespace SegundoParcial.Migrations
 
                     b.HasKey("LlamadaId");
 
-                    b.ToTable("llamadaTable1");
+                    b.ToTable("llamada");
                 });
 
             modelBuilder.Entity("SegundoParcial.Entidades.LlamadaDetalle", b =>

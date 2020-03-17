@@ -7,9 +7,7 @@ namespace SegundoParcial.Entidades
 {
     public class LlamadaDetalle
     {
-        
-        private string text;
-
+       
         [Key]
         public int Id { get; set; }
         public string Problema { get; set; }
@@ -22,14 +20,10 @@ namespace SegundoParcial.Entidades
             Solucion = solucion;
         }
 
-        public LlamadaDetalle(int id, int v, string problema)
+        public LlamadaDetalle()
         {
-            
-        }
 
-        public LlamadaDetalle(int id, int v, string problema, string text) : this(id, v, problema)
-        {
-            this.text = text;
+
         }
     }
 }

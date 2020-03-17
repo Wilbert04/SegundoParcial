@@ -19,8 +19,14 @@
         </Grid.ColumnDefinitions>
         <StackPanel Margin="0,0,157,3" Grid.ColumnSpan="3">
             <Label Content="Id" HorizontalAlignment="Left"/>
-            <TextBox x:Name="IdTextbox"  TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-22,0,0"/>
-            <TextBox x:Name="DescripcionTextbox"  TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center">
+            <TextBox x:Name="IdTextbox"  TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-22,0,0" PreviewTextInput="IdTextbox_PreviewTextInput">
+                <Binding Path="LlamadaId" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding.ValidationRules>
+                        <ExceptionValidationRule/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+            <TextBox x:Name="DescripcionTextbox"  TextWrapping="Wrap" Width="120" VerticalAlignment="Center" HorizontalAlignment="Center" PreviewTextInput="DescripcionTextbox_PreviewTextInput">
                 <TextBox.Text>
                     <Binding Path="Descripcion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                         <Binding.ValidationRules>
@@ -32,9 +38,9 @@
             <Label Content="Descripcion" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="0,-20,0,0"/>
             <GroupBox Header="Agregar Llamada" Height="148" Width="402" HorizontalAlignment="Right"/>
             <Label Content="Problema" HorizontalAlignment="Left" Margin="0,-130,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="ProblemaTextbox"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,-130,0,0">
+            <TextBox x:Name="ProblemaTextbox"  TextWrapping="Wrap" Width="120" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-150,-130,0,0" PreviewTextInput="ProblemaTextbox_PreviewTextInput">
                 <TextBox.Text>
-                    <Binding Path="Llamada.Detalles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding Path="Problema" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                         <Binding.ValidationRules>
                             <ExceptionValidationRule/>
                         </Binding.ValidationRules>
@@ -42,9 +48,9 @@
                 </TextBox.Text>
             </TextBox>
             <Label Content="Solucion" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,-130,-20,0"/>
-            <TextBox x:Name="SolucionTextbox" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-130,40,0">
+            <TextBox x:Name="SolucionTextbox" TextWrapping="Wrap" Width="120" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,-130,40,0" PreviewTextInput="SolucionTextbox_PreviewTextInput">
                 <TextBox.Text>
-                    <Binding Path="Llamada.Detalles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
+                    <Binding Path="Solucion" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay">
                         <Binding.ValidationRules>
                             <ExceptionValidationRule/>
                         </Binding.ValidationRules>
@@ -58,7 +64,9 @@
                 
             </Button>
             <DataGrid x:Name="DataGrid" Height="100" VerticalAlignment="Top" HorizontalAlignment="Stretch" Margin="0,-125,0,0">
-                
+                <DataGrid.ItemsSource>
+                    <Binding Path="Detalles" UpdateSourceTrigger="PropertyChanged" Mode="TwoWay"/>
+                </DataGrid.ItemsSource>
             </DataGrid>
 
         </StackPanel>

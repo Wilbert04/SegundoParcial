@@ -26,7 +26,7 @@ namespace SegundoParcial.UI.Registro
         {
             InitializeComponent();
             this.DataContext = llamada;
-            CargarGrid();
+            
         }
 
         private void Limpiar()
@@ -42,31 +42,13 @@ namespace SegundoParcial.UI.Registro
             Limpiar();
         }
 
-        private void SolucionTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void ProblemaTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
-            {
-                e.Handled = true;
-            }
-
-        }
-
-        private void idTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void IdTextbox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!char.IsDigit(e.Text, e.Text.Length - 1))
                 e.Handled = true;
         }
 
-        private void descripcionTextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        private void DescripcionTextbox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
             if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
             {
@@ -75,12 +57,23 @@ namespace SegundoParcial.UI.Registro
 
         }
 
-        private void CargarGrid()
+        private void ProblemaTextbox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-            DataGrid.ItemsSource = null;
-            DataGrid.ItemsSource = this.llamada.Detalles;
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
+            {
+                e.Handled = true;
+            }
+
         }
 
+        private void SolucionTextbox_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            if (!System.Text.RegularExpressions.Regex.IsMatch(e.Text, "^[a-zA-Z]"))
+            {
+                e.Handled = true;
+            }
+
+        }
 
         private bool Validar()
         {
@@ -92,9 +85,6 @@ namespace SegundoParcial.UI.Registro
                 DescripcionTextbox.Focus();
                 paso = false;
             }
-
-
-          
             return paso;
         }
 
@@ -105,7 +95,7 @@ namespace SegundoParcial.UI.Registro
         }
 
 
-        private void Actualizar()
+        private void Cargar()
         {
             this.DataContext = null;
             this.DataContext = llamada;
@@ -114,37 +104,29 @@ namespace SegundoParcial.UI.Registro
         private void Button_Guardar(object sender, RoutedEventArgs e)
         {
             bool paso = false;
-            Llamada llamada1 = new Llamada();
 
             if (!Validar())
                 return;
 
-            
-
             if (IdTextbox.Text == "0")
+                paso = LlamadaBLL.Guardar(llamada);
+
+            else
             {
-                paso = LlamadaBLL.Guardar(llamada1);
+                if (!ExisteEnBaseDato())
+                {
+                    MessageBox.Show("No puede modificar una llamada que no existe", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                paso = LlamadaBLL.Modificar(llamada);
+            }
+
+            if (paso)
+            {
+                MessageBox.Show("Guardado!!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
             }
             else
             {
-                if (ExisteEnBaseDato())
-                {
-                    MessageBox.Show("No se puede modificar alguien que no existe", "Information", MessageBoxButton.OK, MessageBoxImage.Information);
-                    return;
-                }
-
-                paso = LlamadaBLL.Modificar(llamada1);
-
-                if (paso)
-                {
-                    MessageBox.Show("Guardado!!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                    Limpiar();
-                }
-                else
-                {
-                    MessageBox.Show("No se pudo Guardar!!", "Exito", MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-
+                MessageBox.Show("No se Guardar!!", "Fallo", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
 
@@ -178,7 +160,7 @@ namespace SegundoParcial.UI.Registro
             {
                 MessageBox.Show("Persona Encontrada");
                 llamada = llamada1;
-                Actualizar();
+                Cargar();
             }
             else
             {
@@ -190,8 +172,8 @@ namespace SegundoParcial.UI.Registro
         {
 
             llamada.Detalles.Add(new LlamadaDetalle(llamada.LlamadaId, ProblemaTextbox.Text, SolucionTextbox.Text));
-
-            //CargarGrid();
+            Cargar();
+            
             ProblemaTextbox.Clear();
             SolucionTextbox.Clear();
         }
@@ -202,7 +184,7 @@ namespace SegundoParcial.UI.Registro
 
                 llamada.Detalles.RemoveAt(DataGrid.SelectedIndex);
 
-            CargarGrid();
+            Cargar();
         }
     }
 }

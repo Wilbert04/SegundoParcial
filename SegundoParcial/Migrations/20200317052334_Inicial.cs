@@ -2,12 +2,12 @@
 
 namespace SegundoParcial.Migrations
 {
-    public partial class Nueva : Migration
+    public partial class Inicial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "llamadaTable1",
+                name: "llamada",
                 columns: table => new
                 {
                     LlamadaId = table.Column<int>(nullable: false)
@@ -16,7 +16,7 @@ namespace SegundoParcial.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_llamadaTable1", x => x.LlamadaId);
+                    table.PrimaryKey("PK_llamada", x => x.LlamadaId);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,9 +33,9 @@ namespace SegundoParcial.Migrations
                 {
                     table.PrimaryKey("PK_LlamadaDetalle", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_LlamadaDetalle_llamadaTable1_LLamadaid",
+                        name: "FK_LlamadaDetalle_llamada_LLamadaid",
                         column: x => x.LLamadaid,
-                        principalTable: "llamadaTable1",
+                        principalTable: "llamada",
                         principalColumn: "LlamadaId",
                         onDelete: ReferentialAction.Restrict);
                 });
@@ -52,7 +52,7 @@ namespace SegundoParcial.Migrations
                 name: "LlamadaDetalle");
 
             migrationBuilder.DropTable(
-                name: "llamadaTable1");
+                name: "llamada");
         }
     }
 }

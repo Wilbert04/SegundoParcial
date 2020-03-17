@@ -8,11 +8,11 @@ namespace SegundoParcial.DAL
 {
     public class Contexto : DbContext
     {
-        public DbSet<Llamada> llamadaTable1 { get; set; }
+        public DbSet<Llamada> llamada{ get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@" DataSource = SegundoParcialDB1.db");
+            optionsBuilder.UseSqlite(@"Data Source = Llamadas1.db");
         }
     }
 }

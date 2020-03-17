@@ -27,7 +27,7 @@ namespace SegundoParcial.Migrations
 
                     b.HasKey("LlamadaId");
 
-                    b.ToTable("llamadaTable1");
+                    b.ToTable("llamada");
                 });
 
             modelBuilder.Entity("SegundoParcial.Entidades.LlamadaDetalle", b =>

@@ -10,16 +10,17 @@ namespace SegundoParcial.BLL
 {
     public class LlamadaBLL
     {
-        
-        public static bool Guardar( Llamada llamada)
+
+        public static bool Guardar(Llamada llamada)
         {
             bool paso = false;
             Contexto db = new Contexto();
 
             try
             {
-                if (db.llamadaTable1.Add(llamada) != null)
-                    paso = (db.SaveChanges() > 0);
+                if (db.llamada.Add(llamada) != null)
+                    paso = db.SaveChanges() > 0;
+
             }
             catch (Exception)
             {
@@ -69,7 +70,7 @@ namespace SegundoParcial.BLL
 
             try
             {
-                llamada = db.llamadaTable1.Where(o => o.LlamadaId == id).Include(l => l.Detalles).SingleOrDefault();
+                llamada = db.llamada .Where(o => o.LlamadaId == id).Include(o => o.Detalles).SingleOrDefault();
             }
             catch (Exception)
             {
@@ -90,7 +91,7 @@ namespace SegundoParcial.BLL
 
             try
             {
-                var eliminar = db.llamadaTable1.Find(id);
+                var eliminar = db.llamada .Find(id);
                 db.Entry(eliminar).State = EntityState.Deleted;
                 paso = (db.SaveChanges() > 0);
             }
